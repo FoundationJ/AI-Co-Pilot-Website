@@ -61,13 +61,13 @@ export default async function HomePage() {
               {/* CTA - Outlined style for dark background */}
               {content.ctaText && content.ctaLink && (
                 <div className="flex items-center gap-6">
-                  <Link href={data.ctaLink}>
+                  <Link href={content.ctaLink}>
                     <Button 
                       variant="outline"
                       size="lg" 
                       className="text-[0.9375rem] px-7 py-[1.375rem] h-auto rounded-[0.625rem] font-medium border-white/20 text-hero-light hover:bg-white/5 hover:border-white/30 transition-colors duration-200 bg-transparent"
                     >
-                      {data.ctaText}
+                      {content.ctaText}
                     </Button>
                   </Link>
                   {/* Subtle visual hint */}
