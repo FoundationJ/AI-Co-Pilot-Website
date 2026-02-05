@@ -13,10 +13,10 @@ interface WorkflowVisualProps {
 export function WorkflowVisual({ isDark = false }: WorkflowVisualProps) {
   // Adjust colors based on background
   const textColor = isDark ? '#F5F5F5' : 'currentColor'
-  const lineOpacity = isDark ? '0.15' : '0.15'
-  const nodeOpacity = isDark ? '0.25' : '0.15'
-  const labelOpacity = isDark ? '0.18' : '0.12'
-  const gridOpacity = isDark ? '0.08' : '0.05'
+  const lineOpacity = isDark ? 0.15 : 0.15
+  const nodeOpacity = isDark ? 0.25 : 0.15
+  const labelOpacity = isDark ? 0.18 : 0.12
+  const gridOpacity = isDark ? 0.08 : 0.05
   const crimsonColor = '#991B1B'
   
   return (
