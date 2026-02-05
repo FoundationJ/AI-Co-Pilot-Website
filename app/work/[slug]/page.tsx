@@ -1,4 +1,4 @@
-import { client, isSanityConfigured } from '@/lib/sanity'
+import { safeFetch } from '@/lib/sanity'
 import { caseStudyBySlugQuery } from '@/lib/queries'
 import { PortableText } from '@portabletext/react'
 import { EmptyState } from '@/components/EmptyState'
@@ -31,16 +31,7 @@ export default async function CaseStudyPage({
 }: {
   params: { slug: string }
 }) {
-  if (!isSanityConfigured()) {
-    return (
-      <EmptyState
-        title="Sanity Not Configured"
-        description="Please configure your Sanity project credentials in .env.local"
-      />
-    )
-  }
-
-  const data: CaseStudyData | null = await client.fetch(caseStudyBySlugQuery, {
+  const data = await safeFetch<CaseStudyData>(caseStudyBySlugQuery, {
     slug: params.slug,
   })
 
