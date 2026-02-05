@@ -1,4 +1,4 @@
-import { client, isSanityConfigured } from '@/lib/sanity'
+import { safeFetch } from '@/lib/sanity'
 import { frameworkPageQuery } from '@/lib/queries'
 import { PortableText } from '@portabletext/react'
 import { EmptyState } from '@/components/EmptyState'
@@ -17,23 +17,15 @@ interface FrameworkData {
 export const revalidate = 60
 
 export default async function FrameworkPage() {
-  if (!isSanityConfigured()) {
-    return (
-      <EmptyState
-        title="Sanity Not Configured"
-        description="Please configure your Sanity project credentials in .env.local"
-      />
-    )
-  }
-
-  const data: FrameworkData | null = await client.fetch(frameworkPageQuery)
+  const data = await safeFetch<FrameworkData>(frameworkPageQuery)
 
   if (!data) {
     return (
       <EmptyState
-        title="Framework Content Missing"
-        description="Create the frameworkPage document in Sanity Studio."
+        title="Content Not Yet Configured"
+        description="Add framework content in Sanity Studio to see it here."
         instructions={[
+          'Configure Sanity credentials in .env.local',
           'Run: npm run sanity',
           'Click on "Framework Page" in the sidebar',
           'Add title, description, and sections',
