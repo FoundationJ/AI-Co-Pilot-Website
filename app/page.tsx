@@ -50,7 +50,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-6 py-24 md:py-32 lg:py-40">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 xl:gap-32 items-center">
             {/* Left Column - Content */}
-            <div className="max-w-2xl">
+            <div className="max-w-[40rem]">
               {/* Preview indicator - subtle */}
               {isPreview && (
                 <div className="mb-6 opacity-40">
