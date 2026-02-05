@@ -46,7 +46,7 @@ export default async function HomePage() {
   return (
     <main>
       {/* Dark Hero Section - First Fold */}
-      <section className="relative min-h-[calc(100vh-4rem)] bg-[#0A0A0A] text-white">
+      <section className="relative min-h-[calc(100vh-4rem)] hero-dark text-white">
         <div className="container mx-auto px-6 py-24 md:py-32 lg:py-40">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 xl:gap-32 items-center">
             {/* Left Column - Content */}
@@ -61,13 +61,13 @@ export default async function HomePage() {
               )}
               
               {/* Headline - Strong typography with off-white */}
-              <h1 className="text-[3.25rem] sm:text-[4rem] md:text-[4.75rem] lg:text-[5.25rem] xl:text-[5.75rem] font-semibold tracking-tight text-balance leading-[1.05] mb-6 md:mb-8 text-[#F5F5F5]">
+              <h1 className="text-[3.25rem] sm:text-[4rem] md:text-[4.75rem] lg:text-[5.25rem] xl:text-[5.75rem] font-semibold tracking-tight text-balance leading-[1.05] mb-6 md:mb-8 text-hero-light">
                 {data.headline}
               </h1>
               
               {/* Subheadline - Muted gray */}
               {data.subheadline && (
-                <p className="text-[1.0625rem] md:text-[1.1875rem] text-[#B7B7B7] mb-10 md:mb-14 max-w-[34rem] leading-[1.65] font-normal tracking-[-0.006em]">
+                <p className="text-[1.0625rem] md:text-[1.1875rem] text-hero-muted mb-10 md:mb-14 max-w-[34rem] leading-[1.65] font-normal tracking-[-0.006em]">
                   {data.subheadline}
                 </p>
               )}
@@ -79,7 +79,7 @@ export default async function HomePage() {
                     <Button 
                       variant="outline"
                       size="lg" 
-                      className="text-[0.9375rem] px-7 py-[1.375rem] h-auto rounded-[0.625rem] font-medium border-[#F5F5F5]/20 text-[#F5F5F5] hover:bg-white/5 hover:border-[#F5F5F5]/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 bg-transparent"
+                      className="text-[0.9375rem] px-7 py-[1.375rem] h-auto rounded-[0.625rem] font-medium border-white/20 text-hero-light hover:bg-white/5 hover:border-white/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 bg-transparent"
                     >
                       {data.ctaText}
                     </Button>
