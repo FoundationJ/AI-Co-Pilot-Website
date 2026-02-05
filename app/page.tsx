@@ -48,18 +48,18 @@ export default async function HomePage() {
               
               {/* Headline - Strong typography with off-white */}
               <h1 className="text-[3.25rem] sm:text-[4rem] md:text-[4.75rem] lg:text-[5.25rem] xl:text-[5.75rem] font-semibold tracking-tight text-balance leading-[1.05] mb-6 md:mb-8 text-hero-light">
-                {data.headline}
+                {content.headline}
               </h1>
               
               {/* Subheadline - Muted gray */}
-              {data.subheadline && (
+              {content.subheadline && (
                 <p className="text-[1.0625rem] md:text-[1.1875rem] text-hero-muted mb-10 md:mb-14 max-w-[34rem] leading-[1.65] font-normal tracking-[-0.006em]">
-                  {data.subheadline}
+                  {content.subheadline}
                 </p>
               )}
               
               {/* CTA - Outlined style for dark background */}
-              {data.ctaText && data.ctaLink && (
+              {content.ctaText && content.ctaLink && (
                 <div className="flex items-center gap-6">
                   <Link href={data.ctaLink}>
                     <Button 
