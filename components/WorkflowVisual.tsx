@@ -83,29 +83,20 @@ export function WorkflowVisual({ isDark = false }: WorkflowVisualProps) {
           <circle cx="150" cy="240" r="2.5" fill={textColor} opacity={nodeOpacity * 0.8} />
           <circle cx="325" cy="240" r="2.5" fill={textColor} opacity={nodeOpacity * 0.8} />
           
-          {/* Central accent node - crimson with glow */}
+          {/* Central accent node - crimson with soft halo */}
           <circle 
             cx="250" 
             cy="260" 
-            r="14" 
+            r="16" 
             fill={crimsonColor} 
-            opacity="0.12"
-            className="animate-pulse"
-            style={{ animationDuration: '4s' }}
+            opacity="0.10"
           />
           <circle 
             cx="250" 
             cy="260" 
             r="6" 
             fill={crimsonColor} 
-            opacity="0.6"
-          />
-          <circle 
-            cx="250" 
-            cy="260" 
-            r="3" 
-            fill={crimsonColor} 
-            opacity="0.9"
+            opacity="0.85"
           />
           
           {/* Output nodes */}
