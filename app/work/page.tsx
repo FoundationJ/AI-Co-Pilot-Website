@@ -1,4 +1,4 @@
-import { client, isSanityConfigured } from '@/lib/sanity'
+import { safeFetch } from '@/lib/sanity'
 import { allCaseStudiesQuery } from '@/lib/queries'
 import { EmptyState } from '@/components/EmptyState'
 import Link from 'next/link'
@@ -18,23 +18,15 @@ interface CaseStudy {
 export const revalidate = 60
 
 export default async function WorkPage() {
-  if (!isSanityConfigured()) {
-    return (
-      <EmptyState
-        title="Sanity Not Configured"
-        description="Please configure your Sanity project credentials in .env.local"
-      />
-    )
-  }
-
-  const caseStudies: CaseStudy[] = await client.fetch(allCaseStudiesQuery)
+  const caseStudies = await safeFetch<CaseStudy[]>(allCaseStudiesQuery)
 
   if (!caseStudies || caseStudies.length === 0) {
     return (
       <EmptyState
-        title="No Case Studies Yet"
-        description="Create your first case study in Sanity Studio."
+        title="Content Not Yet Configured"
+        description="Add case studies in Sanity Studio to see them here."
         instructions={[
+          'Configure Sanity credentials in .env.local',
           'Run: npm run sanity',
           'Click on "Case Studies" in the sidebar',
           'Click "Create new Case Study"',
