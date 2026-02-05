@@ -79,7 +79,7 @@ export default async function HomePage() {
                     <Button 
                       variant="outline"
                       size="lg" 
-                      className="text-[0.9375rem] px-7 py-[1.375rem] h-auto rounded-[0.625rem] font-medium border-white/20 text-hero-light hover:bg-white/5 hover:border-white/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 bg-transparent"
+                      className="text-[0.9375rem] px-7 py-[1.375rem] h-auto rounded-[0.625rem] font-medium border-white/20 text-hero-light hover:bg-white/5 hover:border-white/30 transition-colors duration-200 bg-transparent"
                     >
                       {data.ctaText}
                     </Button>
