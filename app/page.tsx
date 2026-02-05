@@ -1,4 +1,4 @@
-import { client, isSanityConfigured } from '@/lib/sanity'
+import { safeFetch, isSanityConfigured } from '@/lib/sanity'
 import { homePageQuery } from '@/lib/queries'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -22,26 +22,12 @@ const PREVIEW_CONTENT = {
 export const revalidate = 60
 
 export default async function HomePage() {
-  let data: HomePageData | null = null
-  let isPreview = false
-
-  // Try to fetch from Sanity, but don't fail if not configured
-  if (isSanityConfigured()) {
-    try {
-      data = await client.fetch(homePageQuery)
-    } catch (error) {
-      console.log('Sanity fetch failed, using preview content')
-      isPreview = true
-    }
-  } else {
-    isPreview = true
-  }
-
-  // Use preview content if Sanity data is not available
-  if (!data) {
-    data = PREVIEW_CONTENT
-    isPreview = true
-  }
+  // Use safe fetch that won't make network calls if not configured
+  const data = await safeFetch<HomePageData>(homePageQuery)
+  
+  // Use preview content if no data
+  const content = data || PREVIEW_CONTENT
+  const isPreview = !data
 
   return (
     <main>
