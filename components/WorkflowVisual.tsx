@@ -1,11 +1,24 @@
 'use client'
 
+interface WorkflowVisualProps {
+  isDark?: boolean
+}
+
 /**
  * Subtle AI workflow visualization
+ * Adapts to light or dark backgrounds
  * Features: thin lines, small nodes, minimal labels, low contrast
  * Accent: one crimson node for subtle visual interest
  */
-export function WorkflowVisual() {
+export function WorkflowVisual({ isDark = false }: WorkflowVisualProps) {
+  // Adjust colors based on background
+  const textColor = isDark ? '#F5F5F5' : 'currentColor'
+  const lineOpacity = isDark ? '0.15' : '0.15'
+  const nodeOpacity = isDark ? '0.25' : '0.15'
+  const labelOpacity = isDark ? '0.18' : '0.12'
+  const gridOpacity = isDark ? '0.08' : '0.05'
+  const crimsonColor = '#991B1B'
+  
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       <svg
@@ -13,105 +26,98 @@ export function WorkflowVisual() {
         className="w-full h-full max-w-lg"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Ultra-subtle grid background */}
+        {/* Grid background with dots pattern */}
         <defs>
+          {/* Dot grid pattern */}
           <pattern
-            id="grid"
-            width="50"
-            height="50"
+            id={`dotGrid-${isDark ? 'dark' : 'light'}`}
+            width="40"
+            height="40"
             patternUnits="userSpaceOnUse"
           >
-            <path
-              d="M 50 0 L 0 0 0 50"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="0.3"
-              opacity="0.05"
+            <circle 
+              cx="20" 
+              cy="20" 
+              r="1" 
+              fill={textColor} 
+              opacity={gridOpacity}
             />
           </pattern>
+          
+          {/* Gradient for lines */}
           <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
-            <stop offset="50%" stopColor="currentColor" stopOpacity="0.15" />
-            <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+            <stop offset="0%" stopColor={textColor} stopOpacity="0" />
+            <stop offset="50%" stopColor={textColor} stopOpacity={lineOpacity} />
+            <stop offset="100%" stopColor={textColor} stopOpacity="0" />
           </linearGradient>
         </defs>
-        <rect width="500" height="500" fill="url(#grid)" />
+        
+        {/* Background with dots */}
+        <rect width="500" height="500" fill={`url(#dotGrid-${isDark ? 'dark' : 'light'})`} />
 
-        {/* Workflow connections - ultra-thin lines with fade effect */}
-        <g stroke="url(#fadeGradient)" fill="none" strokeWidth="0.8">
+        {/* Workflow connections - ultra-thin lines */}
+        <g stroke={textColor} fill="none" strokeWidth="0.8" opacity={lineOpacity}>
           {/* Primary flow path */}
-          <path 
-            d="M 100 150 L 200 150 L 200 200 L 250 200" 
-            opacity="0.3"
-          />
-          <path 
-            d="M 300 150 L 350 150 L 350 200 L 300 200" 
-            opacity="0.25"
-          />
-          <path 
-            d="M 250 250 L 250 300 L 220 320" 
-            opacity="0.3"
-          />
-          <path 
-            d="M 250 250 L 250 300 L 280 320" 
-            opacity="0.25"
-          />
+          <path d="M 100 150 L 200 150 L 200 200 L 250 200" />
+          <path d="M 300 150 L 350 150 L 350 200 L 300 200" opacity="0.8" />
+          <path d="M 250 250 L 250 300 L 220 320" />
+          <path d="M 250 250 L 250 300 L 280 320" opacity="0.8" />
           
           {/* Secondary connections */}
-          <line x1="150" y1="150" x2="150" y2="220" opacity="0.15" />
-          <line x1="325" y1="175" x2="325" y2="220" opacity="0.15" />
+          <line x1="150" y1="150" x2="150" y2="220" opacity="0.6" />
+          <line x1="325" y1="175" x2="325" y2="220" opacity="0.6" />
         </g>
 
         {/* Workflow nodes - minimal and subtle */}
         <g>
           {/* Input nodes */}
-          <circle cx="100" cy="150" r="3" fill="currentColor" opacity="0.15" />
-          <circle cx="150" cy="150" r="2.5" fill="currentColor" opacity="0.1" />
+          <circle cx="100" cy="150" r="3" fill={textColor} opacity={nodeOpacity} />
+          <circle cx="150" cy="150" r="2.5" fill={textColor} opacity={nodeOpacity * 0.7} />
           
           {/* Processing nodes */}
-          <circle cx="200" cy="150" r="4" fill="currentColor" opacity="0.2" />
-          <circle cx="300" cy="150" r="3.5" fill="currentColor" opacity="0.18" />
+          <circle cx="200" cy="150" r="4" fill={textColor} opacity={nodeOpacity * 1.2} />
+          <circle cx="300" cy="150" r="3.5" fill={textColor} opacity={nodeOpacity} />
           
           {/* Analysis nodes */}
-          <circle cx="250" cy="200" r="3" fill="currentColor" opacity="0.15" />
-          <circle cx="150" cy="240" r="2.5" fill="currentColor" opacity="0.12" />
-          <circle cx="325" cy="240" r="2.5" fill="currentColor" opacity="0.12" />
+          <circle cx="250" cy="200" r="3" fill={textColor} opacity={nodeOpacity} />
+          <circle cx="150" cy="240" r="2.5" fill={textColor} opacity={nodeOpacity * 0.8} />
+          <circle cx="325" cy="240" r="2.5" fill={textColor} opacity={nodeOpacity * 0.8} />
           
-          {/* Central accent node - subtle crimson with glow */}
+          {/* Central accent node - crimson with glow */}
           <circle 
             cx="250" 
             cy="260" 
-            r="12" 
-            fill="#991B1B" 
-            opacity="0.08"
+            r="14" 
+            fill={crimsonColor} 
+            opacity="0.12"
             className="animate-pulse"
             style={{ animationDuration: '4s' }}
           />
           <circle 
             cx="250" 
             cy="260" 
-            r="5" 
-            fill="#991B1B" 
-            opacity="0.5"
+            r="6" 
+            fill={crimsonColor} 
+            opacity="0.6"
           />
           <circle 
             cx="250" 
             cy="260" 
-            r="2.5" 
-            fill="#7F1D1D" 
-            opacity="0.8"
+            r="3" 
+            fill={crimsonColor} 
+            opacity="0.9"
           />
           
           {/* Output nodes */}
-          <circle cx="220" cy="340" r="3" fill="currentColor" opacity="0.15" />
-          <circle cx="280" cy="340" r="3" fill="currentColor" opacity="0.15" />
+          <circle cx="220" cy="340" r="3" fill={textColor} opacity={nodeOpacity} />
+          <circle cx="280" cy="340" r="3" fill={textColor} opacity={nodeOpacity} />
         </g>
 
         {/* Minimal labels - barely visible */}
         <g
           fontSize="8"
-          fill="currentColor"
-          opacity="0.12"
+          fill={textColor}
+          opacity={labelOpacity}
           fontFamily="system-ui"
           letterSpacing="0.5"
         >
@@ -121,28 +127,28 @@ export function WorkflowVisual() {
         </g>
 
         {/* Subtle data flow indicators */}
-        <g opacity="0.08">
-          <circle cx="175" cy="150" r="1.5" fill="currentColor">
+        <g opacity="0.15">
+          <circle cx="175" cy="150" r="1.5" fill={textColor}>
             <animate
               attributeName="opacity"
-              values="0;0.3;0"
+              values="0;0.5;0"
               dur="3s"
               repeatCount="indefinite"
             />
           </circle>
-          <circle cx="275" cy="200" r="1.5" fill="currentColor">
+          <circle cx="275" cy="200" r="1.5" fill={textColor}>
             <animate
               attributeName="opacity"
-              values="0;0.3;0"
+              values="0;0.5;0"
               dur="3s"
               begin="1s"
               repeatCount="indefinite"
             />
           </circle>
-          <circle cx="235" cy="280" r="1.5" fill="#991B1B">
+          <circle cx="235" cy="280" r="1.5" fill={crimsonColor}>
             <animate
               attributeName="opacity"
-              values="0;0.5;0"
+              values="0;0.7;0"
               dur="3s"
               begin="2s"
               repeatCount="indefinite"
