@@ -1,4 +1,4 @@
-import { client, isSanityConfigured } from '@/lib/sanity'
+import { safeFetch } from '@/lib/sanity'
 import { playbookQuery } from '@/lib/queries'
 import { PortableText } from '@portabletext/react'
 import { Button } from '@/components/ui/button'
@@ -20,23 +20,15 @@ interface PlaybookData {
 export const revalidate = 60
 
 export default async function PlaybookPage() {
-  if (!isSanityConfigured()) {
-    return (
-      <EmptyState
-        title="Sanity Not Configured"
-        description="Please configure your Sanity project credentials in .env.local"
-      />
-    )
-  }
-
-  const data: PlaybookData | null = await client.fetch(playbookQuery)
+  const data = await safeFetch<PlaybookData>(playbookQuery)
 
   if (!data) {
     return (
       <EmptyState
-        title="Playbook Content Missing"
-        description="Create the playbook document in Sanity Studio."
+        title="Content Not Yet Configured"
+        description="Add playbook content in Sanity Studio to see it here."
         instructions={[
+          'Configure Sanity credentials in .env.local',
           'Run: npm run sanity',
           'Click on "Playbook" in the sidebar',
           'Add title, description, and content',
