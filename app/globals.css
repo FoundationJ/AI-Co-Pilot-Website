@@ -37,6 +37,11 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: 'rlig' 1, 'calt' 1;
+    letter-spacing: -0.011em;
+  }
+  h1 {
+    letter-spacing: -0.025em;
+    font-feature-settings: 'ss01' 1, 'ss02' 1;
   }
 }
 
