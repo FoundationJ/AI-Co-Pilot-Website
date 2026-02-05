@@ -7,89 +7,147 @@
  */
 export function WorkflowVisual() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center opacity-40">
+    <div className="relative w-full h-full flex items-center justify-center">
       <svg
-        viewBox="0 0 400 400"
-        className="w-full h-full max-w-md"
+        viewBox="0 0 500 500"
+        className="w-full h-full max-w-lg"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Subtle grid pattern */}
+        {/* Ultra-subtle grid background */}
         <defs>
           <pattern
             id="grid"
-            width="40"
-            height="40"
+            width="50"
+            height="50"
             patternUnits="userSpaceOnUse"
           >
             <path
-              d="M 40 0 L 0 0 0 40"
+              d="M 50 0 L 0 0 0 50"
               fill="none"
               stroke="currentColor"
-              strokeWidth="0.5"
-              opacity="0.1"
+              strokeWidth="0.3"
+              opacity="0.05"
             />
           </pattern>
+          <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+            <stop offset="50%" stopColor="currentColor" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+          </linearGradient>
         </defs>
-        <rect width="400" height="400" fill="url(#grid)" />
+        <rect width="500" height="500" fill="url(#grid)" />
 
-        {/* Workflow connections - thin lines */}
-        <g stroke="currentColor" fill="none" strokeWidth="1" opacity="0.2">
-          {/* Horizontal flow */}
-          <line x1="80" y1="120" x2="160" y2="120" />
-          <line x1="200" y1="120" x2="280" y2="120" />
+        {/* Workflow connections - ultra-thin lines with fade effect */}
+        <g stroke="url(#fadeGradient)" fill="none" strokeWidth="0.8">
+          {/* Primary flow path */}
+          <path 
+            d="M 100 150 L 200 150 L 200 200 L 250 200" 
+            opacity="0.3"
+          />
+          <path 
+            d="M 300 150 L 350 150 L 350 200 L 300 200" 
+            opacity="0.25"
+          />
+          <path 
+            d="M 250 250 L 250 300 L 220 320" 
+            opacity="0.3"
+          />
+          <path 
+            d="M 250 250 L 250 300 L 280 320" 
+            opacity="0.25"
+          />
           
-          {/* Vertical connections */}
-          <line x1="180" y1="140" x2="180" y2="200" />
-          <line x1="280" y1="140" x2="280" y2="200" />
-          
-          {/* Diagonal flow */}
-          <line x1="180" y1="220" x2="240" y2="260" />
-          <line x1="280" y1="220" x2="240" y2="260" />
-          
-          {/* Lower flow */}
-          <line x1="240" y1="280" x2="240" y2="320" />
+          {/* Secondary connections */}
+          <line x1="150" y1="150" x2="150" y2="220" opacity="0.15" />
+          <line x1="325" y1="175" x2="325" y2="220" opacity="0.15" />
         </g>
 
-        {/* Workflow nodes */}
+        {/* Workflow nodes - minimal and subtle */}
         <g>
-          {/* Standard nodes - very subtle */}
-          <circle cx="80" cy="120" r="4" fill="currentColor" opacity="0.15" />
-          <circle cx="180" cy="120" r="5" fill="currentColor" opacity="0.2" />
-          <circle cx="280" cy="120" r="4" fill="currentColor" opacity="0.15" />
-          <circle cx="180" cy="220" r="4" fill="currentColor" opacity="0.15" />
-          <circle cx="280" cy="220" r="4" fill="currentColor" opacity="0.15" />
-          <circle cx="240" cy="340" r="4" fill="currentColor" opacity="0.15" />
+          {/* Input nodes */}
+          <circle cx="100" cy="150" r="3" fill="currentColor" opacity="0.15" />
+          <circle cx="150" cy="150" r="2.5" fill="currentColor" opacity="0.1" />
           
-          {/* Accent node - subtle crimson */}
+          {/* Processing nodes */}
+          <circle cx="200" cy="150" r="4" fill="currentColor" opacity="0.2" />
+          <circle cx="300" cy="150" r="3.5" fill="currentColor" opacity="0.18" />
+          
+          {/* Analysis nodes */}
+          <circle cx="250" cy="200" r="3" fill="currentColor" opacity="0.15" />
+          <circle cx="150" cy="240" r="2.5" fill="currentColor" opacity="0.12" />
+          <circle cx="325" cy="240" r="2.5" fill="currentColor" opacity="0.12" />
+          
+          {/* Central accent node - subtle crimson with glow */}
           <circle 
-            cx="240" 
-            cy="270" 
-            r="6" 
+            cx="250" 
+            cy="260" 
+            r="12" 
             fill="#991B1B" 
-            opacity="0.6"
+            opacity="0.08"
             className="animate-pulse"
-            style={{ animationDuration: '3s' }}
+            style={{ animationDuration: '4s' }}
           />
           <circle 
-            cx="240" 
-            cy="270" 
-            r="3" 
+            cx="250" 
+            cy="260" 
+            r="5" 
             fill="#991B1B" 
-            opacity="0.9"
+            opacity="0.5"
           />
+          <circle 
+            cx="250" 
+            cy="260" 
+            r="2.5" 
+            fill="#7F1D1D" 
+            opacity="0.8"
+          />
+          
+          {/* Output nodes */}
+          <circle cx="220" cy="340" r="3" fill="currentColor" opacity="0.15" />
+          <circle cx="280" cy="340" r="3" fill="currentColor" opacity="0.15" />
         </g>
 
-        {/* Minimal labels - very subtle */}
+        {/* Minimal labels - barely visible */}
         <g
-          fontSize="9"
+          fontSize="8"
           fill="currentColor"
-          opacity="0.15"
+          opacity="0.12"
           fontFamily="system-ui"
+          letterSpacing="0.5"
         >
-          <text x="70" y="110" textAnchor="middle">input</text>
-          <text x="180" y="110" textAnchor="middle">process</text>
-          <text x="280" y="110" textAnchor="middle">analyze</text>
-          <text x="240" y="355" textAnchor="middle">output</text>
+          <text x="100" y="138" textAnchor="middle">input</text>
+          <text x="250" y="188" textAnchor="middle">process</text>
+          <text x="250" y="358" textAnchor="middle">output</text>
+        </g>
+
+        {/* Subtle data flow indicators */}
+        <g opacity="0.08">
+          <circle cx="175" cy="150" r="1.5" fill="currentColor">
+            <animate
+              attributeName="opacity"
+              values="0;0.3;0"
+              dur="3s"
+              repeatCount="indefinite"
+            />
+          </circle>
+          <circle cx="275" cy="200" r="1.5" fill="currentColor">
+            <animate
+              attributeName="opacity"
+              values="0;0.3;0"
+              dur="3s"
+              begin="1s"
+              repeatCount="indefinite"
+            />
+          </circle>
+          <circle cx="235" cy="280" r="1.5" fill="#991B1B">
+            <animate
+              attributeName="opacity"
+              values="0;0.5;0"
+              dur="3s"
+              begin="2s"
+              repeatCount="indefinite"
+            />
+          </circle>
         </g>
       </svg>
     </div>
