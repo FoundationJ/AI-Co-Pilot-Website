@@ -1,4 +1,4 @@
-import { client, isSanityConfigured } from '@/lib/sanity'
+import { safeFetch } from '@/lib/sanity'
 import { allTalksQuery } from '@/lib/queries'
 import { EmptyState } from '@/components/EmptyState'
 import { formatDate } from '@/lib/utils'
@@ -20,23 +20,15 @@ interface Talk {
 export const revalidate = 60
 
 export default async function TalksPage() {
-  if (!isSanityConfigured()) {
-    return (
-      <EmptyState
-        title="Sanity Not Configured"
-        description="Please configure your Sanity project credentials in .env.local"
-      />
-    )
-  }
-
-  const talks: Talk[] = await client.fetch(allTalksQuery)
+  const talks = await safeFetch<Talk[]>(allTalksQuery)
 
   if (!talks || talks.length === 0) {
     return (
       <EmptyState
-        title="No Talks Yet"
-        description="Create your first talk in Sanity Studio."
+        title="Content Not Yet Configured"
+        description="Add talks in Sanity Studio to see them here."
         instructions={[
+          'Configure Sanity credentials in .env.local',
           'Run: npm run sanity',
           'Click on "Talks" in the sidebar',
           'Click "Create new Talk"',
